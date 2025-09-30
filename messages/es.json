@@ -1,0 +1,143 @@
+{
+  "common": {
+    "welcome": "Hola",
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Agregar",
+    "search": "Buscar",
+    "filters": "Filtros",
+    "all": "Todos",
+    "manageAccount": "Gestionar Cuenta"
+  },
+  "navigation": {
+    "dashboard": "Panel",
+    "transactions": "Transacciones",
+    "profile": "Perfil"
+  },
+  "auth": {
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "signInHere": "Inicia sesión aquí",
+    "success": "Éxito",
+    "signInSuccess": "Inicio de sesión exitoso",
+    "signUpSuccess": "Registro exitoso",
+    "signOutSuccess": "Cierre de sesión exitoso",
+    "signIn": "Iniciar Sesión",
+    "signOut": "Cerrar Sesión",
+    "email": "Correo Electrónico",
+    "emailRequired": "Correo electrónico es requerido",
+    "enterEmailFirst": "Por favor, ingresa tu correo electrónico primero",
+    "password": "Contraseña",
+    "enterEmail": "Ingresa tu correo electrónico",
+    "enterPassword": "Ingresa tu contraseña",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "welcomeBack": "Bienvenido de vuelta",
+    "getStarted": "Comienza con tu cuenta",
+    "rememberMe": "Recordarme",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "signInWithGoogle": "Iniciar sesión con Google",
+    "signInWithGitHub": "Iniciar sesión con GitHub",
+    "signInWithDiscord": "Iniciar sesión con Discord",
+    "orContinueWith": "O continúa con",
+    "signingIn": "Iniciando sesión...",
+    "signInError": "Error al iniciar sesión",
+    "invalidCredentials": "Correo o contraseña inválidos",
+    "unexpectedError": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo.",
+    "tryAgain": "Intentar de nuevo",
+    "dontHaveAccount": "¿No tienes una cuenta?",
+    "signUpHere": "Regístrate aquí"
+  },
+  "dashboard": {
+    "generalLimit": "General",
+    "totalAvailable": "Total Disponible",
+    "recentTransactions": "Transacciones Recientes",
+    "noTransactions": "Aún no hay transacciones",
+    "noTransactionsDescription": "Tus transacciones recientes aparecerán aquí una vez que comiences a agregarlas.",
+    "summary": {
+      "generalLimit": "General",
+      "totalAvailable": "Total Disponible"
+    },
+    "groups": {
+      "title": "Tus Grupos Financieros",
+      "limit": "Límite",
+      "available": "Disponible",
+      "noGroups": "Aún no hay grupos",
+      "noGroupsDescription": "Crea tu primer grupo financiero para comenzar a gestionar tu presupuesto de manera efectiva."
+    }
+  },
+  "transactions": {
+    "allGroups": "Todos los Grupos",
+    "income": "Ingreso",
+    "expense": "Gasto",
+    "manageTransactions": "Gestionar Transacciones",
+    "searchByConcept": "Buscar por concepto...",
+    "title": "Transacciones",
+    "subtitle": "Gestiona tus ingresos y gastos",
+    "searchPlaceholder": "Buscar transacciones..."
+  },
+  "profile": {
+    "title": "Perfil",
+    "personalInformation": "Información Personal",
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "uploadPhoto": "Subir Foto",
+    "profilePicture": "Foto de Perfil",
+    "enterFullName": "Ingresa tu nombre completo",
+    "edit": "Editar",
+    "cancel": "Cancelar"
+  },
+  "theme": {
+    "toggleTheme": "Cambiar tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "addTransaction": {
+    "title": "Agregar Nueva Transacción",
+    "description": "Agrega una nueva transacción a tu registro financiero.",
+    "label": "Agregar Transacción",
+    "ariaLabel": "Abrir Modal de Agregar Transacción"
+  },
+  "validation": {
+    "amountRequired": "El monto es requerido",
+    "amountMinimum": "El monto debe ser al menos",
+    "amountMaximum": "El monto no debe exceder",
+    "descriptionRequired": "La descripción es requerida",
+    "descriptionMinimum": "La descripción debe tener al menos",
+    "descriptionMaximum": "La descripción no debe exceder",
+    "typeRequired": "El tipo de transacción es requerido",
+    "invalidType": "Tipo de transacción inválido",
+    "groupNameRequired": "El nombre del grupo es requerido",
+    "groupNameMinimum": "El nombre del grupo debe tener al menos",
+    "groupNameMaximum": "El nombre del grupo no debe exceder",
+    "percentageRequired": "El porcentaje es requerido",
+    "percentageMinimum": "El porcentaje debe ser al menos",
+    "percentageMaximum": "El porcentaje no debe exceder",
+    "character": "carácter",
+    "characters": "caracteres"
+  },
+  "errors": {
+    "authenticationError": "Error de Autenticación",
+    "accountCreated": "¡Cuenta creada!",
+    "checkEmail": "Revisa tu correo para confirmar tu cuenta.",
+    "signedInSuccessfully": "Has iniciado sesión exitosamente.",
+    "error": "Error",
+    "unexpectedError": "Ocurrió un error inesperado. Por favor intenta de nuevo.",
+    "emailRequired": "Correo requerido",
+    "enterEmailFirst": "Por favor ingresa tu dirección de correo primero.",
+    "magicLinkSent": "¡Enlace mágico enviado!",
+    "checkEmailMagicLink": "Revisa tu correo por el enlace mágico.",
+    "failedMagicLink": "Falló el envío del enlace mágico. Por favor intenta de nuevo."
+  },
+  "app": {
+    "name": "Finance",
+    "manageAccount": "Gestionar cuenta",
+    "user": "Usuario"
+  },
+  "currency": {
+    "symbol": "S/."
+  }
+}

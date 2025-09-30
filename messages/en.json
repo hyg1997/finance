@@ -1,0 +1,143 @@
+{
+  "common": {
+    "welcome": "Hello",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filters": "Filters",
+    "all": "All",
+    "manageAccount": "Manage Account"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "transactions": "Transactions",
+    "profile": "Profile"
+  },
+  "auth": {
+    "alreadyHaveAccount": "Already have an account?",
+    "signInHere": "Sign in here",
+    "success": "Success",
+    "signInSuccess": "Sign in successful",
+    "signUpSuccess": "Sign up successful",
+    "signOutSuccess": "Sign out successful",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "email": "Email",
+    "emailRequired": "Email is required",
+    "enterEmailFirst": "Please enter your email first",
+    "password": "Password",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "welcomeBack": "Welcome back",
+    "getStarted": "Get started with your account",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot your password?",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithGitHub": "Sign in with GitHub",
+    "signInWithDiscord": "Sign in with Discord",
+    "orContinueWith": "Or continue with",
+    "signingIn": "Signing in...",
+    "signInError": "Sign in error",
+    "invalidCredentials": "Invalid email or password",
+    "unexpectedError": "An unexpected error occurred. Please try again.",
+    "tryAgain": "Try again",
+    "dontHaveAccount": "Don't have an account?",
+    "signUpHere": "Sign up here"
+  },
+  "dashboard": {
+    "generalLimit": "General",
+    "totalAvailable": "Total Available",
+    "recentTransactions": "Recent Transactions",
+    "noTransactions": "No transactions yet",
+    "noTransactionsDescription": "Your recent transactions will appear here once you start adding them.",
+    "summary": {
+      "generalLimit": "General",
+      "totalAvailable": "Total Available"
+    },
+    "groups": {
+      "title": "Your Financial Groups",
+      "limit": "Limit",
+      "available": "Available",
+      "noGroups": "No groups yet",
+      "noGroupsDescription": "Create your first financial group to start managing your budget effectively."
+    }
+  },
+  "transactions": {
+    "allGroups": "All Groups",
+    "income": "Income",
+    "expense": "Expense",
+    "manageTransactions": "Manage Transactions",
+    "searchByConcept": "Search by concept...",
+    "title": "Transactions",
+    "subtitle": "Manage your income and expenses",
+    "searchPlaceholder": "Search transactions..."
+  },
+  "profile": {
+    "title": "Profile",
+    "personalInformation": "Personal Information",
+    "fullName": "Full Name",
+    "email": "Email",
+    "uploadPhoto": "Upload Photo",
+    "profilePicture": "Profile Picture",
+    "enterFullName": "Enter your full name",
+    "edit": "Edit",
+    "cancel": "Cancel"
+  },
+  "theme": {
+    "toggleTheme": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "addTransaction": {
+    "title": "Add New Transaction",
+    "description": "Add a new transaction to your financial record.",
+    "label": "Add Transaction",
+    "ariaLabel": "Open Add Transaction Modal"
+  },
+  "validation": {
+    "amountRequired": "Amount is required",
+    "amountMinimum": "Amount must be at least",
+    "amountMaximum": "Amount must not exceed",
+    "descriptionRequired": "Description is required",
+    "descriptionMinimum": "Description must be at least",
+    "descriptionMaximum": "Description must not exceed",
+    "typeRequired": "Transaction type is required",
+    "invalidType": "Invalid transaction type",
+    "groupNameRequired": "Group name is required",
+    "groupNameMinimum": "Group name must be at least",
+    "groupNameMaximum": "Group name must not exceed",
+    "percentageRequired": "Percentage is required",
+    "percentageMinimum": "Percentage must be at least",
+    "percentageMaximum": "Percentage must not exceed",
+    "character": "character",
+    "characters": "characters"
+  },
+  "errors": {
+    "authenticationError": "Authentication Error",
+    "accountCreated": "Account created!",
+    "checkEmail": "Check your email to confirm your account.",
+    "signedInSuccessfully": "You have successfully signed in.",
+    "error": "Error",
+    "unexpectedError": "An unexpected error occurred. Please try again.",
+    "emailRequired": "Email required",
+    "enterEmailFirst": "Please enter your email address first.",
+    "magicLinkSent": "Magic link sent!",
+    "checkEmailMagicLink": "Check your email for the magic link.",
+    "failedMagicLink": "Failed to send magic link. Please try again."
+  },
+  "app": {
+    "name": "Finance",
+    "manageAccount": "Manage account",
+    "user": "User"
+  },
+  "currency": {
+    "symbol": "S/."
+  }
+}
