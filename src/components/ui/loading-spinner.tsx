@@ -80,7 +80,6 @@ export function TableLoadingSkeleton({ rows = 5 }: { rows?: number }) {
   return (
     <div className="animate-pulse space-y-4">
       {Array.from({ length: rows }).map((_, index) => (
-        // eslint-disable-next-line react/no-array-index-key
         <div key={`table-row-skeleton-${index}`} className="flex space-x-4">
           <div className="h-4 bg-gray-300 rounded w-1/4"></div>
           <div className="h-4 bg-gray-300 rounded w-1/3"></div>

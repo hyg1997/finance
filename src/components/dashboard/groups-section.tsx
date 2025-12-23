@@ -16,6 +16,7 @@ export const GroupsSection = memo(async function GroupsSection({
   locale,
 }: GroupsSectionProps) {
   const t = await getTranslations({ locale, namespace: "dashboard.groups" });
+  const currency = await getTranslations({ locale, namespace: "currency" });
 
   return (
     <div className="space-y-4 sm:space-y-6">
@@ -69,7 +70,7 @@ export const GroupsSection = memo(async function GroupsSection({
                       {t("limit")}
                     </p>
                     <p className="text-lg font-semibold text-foreground">
-                      S/.
+                      {currency("symbol")}
                       {group.max_amount.toLocaleString("en-US", {
                         minimumFractionDigits: 2,
                       })}
@@ -82,17 +83,16 @@ export const GroupsSection = memo(async function GroupsSection({
                     <div className="flex items-center gap-1">
                       {isPositive ? (
                         <ArrowUpRight
-                          className={`h-3 w-3 ${
-                            colorClasses.text
+                          className={`h-3 w-3 ${colorClasses.text
                               .replace("text-", "text-")
                               .split(" ")[0]
-                          }`}
+                            }`}
                         />
                       ) : (
                         <ArrowDownRight className="h-3 w-3 text-red-500" />
                       )}
                       <span className={`font-bold ${colorClasses.text}`}>
-                        S/.
+                        {currency("symbol")}
                         {group.available_amount.toLocaleString("en-US", {
                           minimumFractionDigits: 2,
                         })}

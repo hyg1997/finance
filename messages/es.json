@@ -76,7 +76,19 @@
     "searchByConcept": "Buscar por concepto...",
     "title": "Transacciones",
     "subtitle": "Gestiona tus ingresos y gastos",
-    "searchPlaceholder": "Buscar transacciones..."
+    "searchPlaceholder": "Buscar transacciones...",
+    "noDescription": "Sin descripción",
+    "noTransactions": "No hay transacciones disponibles",
+    "deleteTitle": "Eliminar Transacción",
+    "deleteDescription": "¿Estás seguro de que quieres eliminar la transacción '{concept}' por ${amount}? Esta acción no se puede deshacer.",
+    "delete": "Eliminar",
+    "deleting": "Eliminando...",
+    "deleteSuccess": "Transacción eliminada",
+    "deleteSuccessDescription": "La transacción ha sido eliminada exitosamente.",
+    "deleteError": "Error al eliminar",
+    "deleteErrorDescription": "Ocurrió un error al eliminar la transacción.",
+    "editTitle": "Editar Transacción",
+    "editDescription": "Modifica los detalles de la transacción."
   },
   "profile": {
     "title": "Perfil",
@@ -138,6 +150,15 @@
     "user": "Usuario"
   },
   "currency": {
-    "symbol": "S/."
+    "symbol": "S/.",
+    "code": "PEN",
+    "name": "Sol Peruano"
+  },
+  "currencySelector": {
+    "label": "Moneda",
+    "pen": "Soles (PEN)",
+    "usd": "Dólares (USD)",
+    "convertedAmount": "Equivalente",
+    "exchangeRate": "Tipo de cambio"
   }
 }

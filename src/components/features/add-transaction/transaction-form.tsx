@@ -1,9 +1,10 @@
 "use client";
 
-import { Loader2, CheckCircle } from "lucide-react";
-import { useState, memo, useCallback } from "react";
+import { Loader2, CheckCircle, RefreshCw } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useState, memo, useCallback, useEffect } from "react";
 
-import { createTransaction } from "@/app/server-actions/transaction-actions";
+import { createTransaction, updateTransaction } from "@/app/server-actions/transaction-actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,13 +15,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Group, TransactionFormData, TransactionType } from "@/types/supabase";
+import { getExchangeRate, usdToPen } from "@/lib/services/exchange-rate-service";
+import { Group, TransactionFormData, TransactionType, Currency } from "@/types/supabase";
 
 interface TransactionFormProps {
   groups: Group[];
   onSubmit?: (data: FormData) => Promise<void>;
   onCancel: () => void;
   onSuccess?: () => void;
+  initialData?: TransactionFormData;
+  transactionId?: string;
+  isEditing?: boolean;
 }
 
 export const TransactionForm = memo(function TransactionForm({
@@ -28,16 +33,45 @@ export const TransactionForm = memo(function TransactionForm({
   onSubmit,
   onCancel,
   onSuccess,
+  initialData,
+  transactionId,
+  isEditing = false,
 }: TransactionFormProps) {
-  const [formData, setFormData] = useState<TransactionFormData>({
-    concept: "",
-    amount: 0,
-    type: "income",
-    groupId: "",
-  });
+  const [formData, setFormData] = useState<TransactionFormData>(
+    initialData || {
+      concept: "",
+      amount: 0,
+      type: "income",
+      groupId: "",
+      inputCurrency: "PEN",
+    }
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [exchangeRate, setExchangeRate] = useState<number>(3.75);
+  const [convertedAmount, setConvertedAmount] = useState<number>(0);
   const { toast } = useToast();
+  const t = useTranslations("currencySelector");
+  const tCommon = useTranslations("common");
+
+  // Fetch exchange rate on mount
+  useEffect(() => {
+    async function fetchRate() {
+      const rate = await getExchangeRate();
+      setExchangeRate(rate);
+    }
+    fetchRate();
+  }, []);
+
+  // Calculate converted amount when amount or currency changes
+  useEffect(() => {
+    if (formData.inputCurrency === "USD" && formData.amount > 0) {
+      const penAmount = formData.amount * exchangeRate;
+      setConvertedAmount(penAmount);
+    } else {
+      setConvertedAmount(0);
+    }
+  }, [formData.amount, formData.inputCurrency, exchangeRate]);
 
   const validateForm = useCallback(() => {
     const newErrors: Record<string, string> = {};
@@ -68,9 +102,15 @@ export const TransactionForm = memo(function TransactionForm({
     setIsLoading(true);
 
     try {
+      // Convert USD to PEN if needed before saving
+      let amountToSave = formData.amount;
+      if (formData.inputCurrency === "USD") {
+        amountToSave = await usdToPen(formData.amount);
+      }
+
       const formDataObj = new FormData();
       formDataObj.append("concept", formData.concept);
-      formDataObj.append("amount", formData.amount.toString());
+      formDataObj.append("amount", amountToSave.toString());
       formDataObj.append("type", formData.type);
       if (formData.groupId) {
         formDataObj.append("group_id", formData.groupId);
@@ -78,28 +118,35 @@ export const TransactionForm = memo(function TransactionForm({
 
       if (onSubmit) {
         await onSubmit(formDataObj);
+      } else if (isEditing && transactionId) {
+        await updateTransaction(transactionId, formDataObj);
       } else {
         await createTransaction(formDataObj);
       }
 
       toast({
         variant: "success",
-        title: "Transaction Created!",
-        description: "The transaction has been saved successfully.",
+        title: isEditing ? "Transaction Updated!" : "Transaction Created!",
+        description: isEditing
+          ? "The transaction has been updated successfully."
+          : "The transaction has been saved successfully.",
       });
 
-      setFormData({
-        concept: "",
-        amount: 0,
-        type: "income",
-        groupId: "",
-      });
+      if (!isEditing) {
+        setFormData({
+          concept: "",
+          amount: 0,
+          type: "income",
+          groupId: "",
+          inputCurrency: "PEN",
+        });
+      }
 
       onSuccess?.();
     } catch {
       toast({
         title: "Error",
-        description: "Error creating transaction",
+        description: isEditing ? "Error updating transaction" : "Error creating transaction",
         variant: "destructive",
       });
     } finally {
@@ -126,11 +173,10 @@ export const TransactionForm = memo(function TransactionForm({
           }
           placeholder="Enter transaction concept"
           disabled={isLoading}
-          className={`transition-all duration-200 ${
-            errors["concept"]
+          className={`transition-all duration-200 ${errors["concept"]
               ? "border-destructive focus:ring-destructive"
               : "focus:ring-primary/20"
-          }`}
+            }`}
           required
           aria-describedby={errors["concept"] ? "concept-error" : undefined}
           aria-invalid={!!errors["concept"]}
@@ -156,29 +202,45 @@ export const TransactionForm = memo(function TransactionForm({
             <CheckCircle className="h-4 w-4 text-success" />
           ) : null}
         </label>
-        <Input
-          id="amount"
-          type="number"
-          step="0.01"
-          min="0"
-          value={formData.amount === 0 ? "" : formData.amount}
-          onChange={(e) =>
-            setFormData((prev) => ({
-              ...prev,
-              amount: e.target.value === "" ? 0 : parseFloat(e.target.value),
-            }))
-          }
-          placeholder="0.00"
-          disabled={isLoading}
-          className={`transition-all duration-200 ${
-            errors["amount"]
-              ? "border-destructive focus:ring-destructive"
-              : "focus:ring-primary/20"
-          }`}
-          required
-          aria-describedby={errors["amount"] ? "amount-error" : undefined}
-          aria-invalid={!!errors["amount"]}
-        />
+        <div className="flex gap-2">
+          <Input
+            id="amount"
+            type="number"
+            step="0.01"
+            min="0"
+            value={formData.amount === 0 ? "" : formData.amount}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                amount: e.target.value === "" ? 0 : parseFloat(e.target.value),
+              }))
+            }
+            placeholder="0.00"
+            disabled={isLoading}
+            className={`transition-all duration-200 flex-1 ${errors["amount"]
+                ? "border-destructive focus:ring-destructive"
+                : "focus:ring-primary/20"
+              }`}
+            required
+            aria-describedby={errors["amount"] ? "amount-error" : undefined}
+            aria-invalid={!!errors["amount"]}
+          />
+          <Select
+            value={formData.inputCurrency || "PEN"}
+            onValueChange={(value: Currency) =>
+              setFormData((prev) => ({ ...prev, inputCurrency: value }))
+            }
+            disabled={isLoading}
+          >
+            <SelectTrigger className="w-28 transition-all duration-200">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="PEN">{t("pen")}</SelectItem>
+              <SelectItem value="USD">{t("usd")}</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         {errors["amount"] && (
           <p
             id="amount-error"
@@ -187,6 +249,22 @@ export const TransactionForm = memo(function TransactionForm({
           >
             {errors["amount"]}
           </p>
+        )}
+
+        {/* Currency conversion preview */}
+        {formData.inputCurrency === "USD" && formData.amount > 0 && (
+          <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 rounded-md p-2">
+            <RefreshCw className="h-3 w-3" />
+            <span>
+              {t("convertedAmount")}: S/.{convertedAmount.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </span>
+            <span className="text-xs">
+              ({t("exchangeRate")}: 1 USD = {exchangeRate.toFixed(2)} PEN)
+            </span>
+          </div>
         )}
       </div>
 
@@ -267,7 +345,7 @@ export const TransactionForm = memo(function TransactionForm({
           disabled={isLoading}
           className="flex-1"
         >
-          Cancel
+          {tCommon("cancel")}
         </Button>
         <Button type="submit" disabled={isLoading} className="flex-1 relative">
           {isLoading ? (
@@ -276,7 +354,7 @@ export const TransactionForm = memo(function TransactionForm({
               Saving...
             </>
           ) : (
-            "Save"
+            tCommon("save")
           )}
         </Button>
       </div>

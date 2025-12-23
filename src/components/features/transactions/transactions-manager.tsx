@@ -4,8 +4,6 @@ import {
   Search,
   Filter,
   Calendar,
-  Edit,
-  Trash2,
   Tag,
   ArrowUpRight,
   ArrowDownRight,
@@ -20,6 +18,8 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { TransactionWithGroup, Group } from "@/types/supabase";
 
+import { DeleteTransactionDialog } from "./delete-transaction-dialog";
+
 interface TransactionsManagerProps {
   transactions: TransactionWithGroup[];
   groups: Group[];
@@ -31,6 +31,7 @@ export const TransactionsManager = memo(function TransactionsManager({
 }: TransactionsManagerProps) {
   const t = useTranslations("transactions");
   const tCommon = useTranslations("common");
+  const currency = useTranslations("currency");
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGroup, setSelectedGroup] = useState<string>("all");
@@ -160,12 +161,7 @@ export const TransactionsManager = memo(function TransactionsManager({
 
                 <div className="flex flex-col items-end space-y-2">
                   <div className="flex mr-[-0.5rem]">
-                    <Button variant="ghost" size="sm">
-                      <Edit className="h-4 w-4" />
-                    </Button>
-                    <Button variant="ghost" size="sm">
-                      <Trash2 className="h-4 w-4 text-destructive" />
-                    </Button>
+                    <DeleteTransactionDialog transaction={transaction} />
                   </div>
                   <span
                     className={cn(
@@ -175,7 +171,7 @@ export const TransactionsManager = memo(function TransactionsManager({
                         : "text-red-600 dark:text-red-400"
                     )}
                   >
-                    {transaction.type === "income" ? "+" : "-"}$
+                    {transaction.type === "income" ? "+" : "-"}{currency("symbol")}
                     {transaction.amount.toFixed(2)}
                   </span>
                   {transaction.group && (

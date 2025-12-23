@@ -42,7 +42,7 @@ export function AddTransactionFAB({
         aria-label={t("ariaLabel")}
       />
 
-      <Modal open={isOpen}>
+      <Modal open={isOpen} onOpenChange={setIsOpen}>
         <ModalContent>
           <ModalHeader>
             <ModalTitle>{t("title")}</ModalTitle>

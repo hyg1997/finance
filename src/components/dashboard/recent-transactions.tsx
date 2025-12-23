@@ -43,16 +43,14 @@ export const RecentTransactions = memo(async function RecentTransactions({
                 <div className="flex items-center gap-3 flex-1 min-w-0">
                   <div
                     className={cn(
-                      "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center",
-                      isIncome
-                        ? "bg-green-100 dark:bg-green-900/30"
-                        : "bg-red-100 dark:bg-red-900/30"
+                      "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white",
+                      isIncome ? "bg-green-500" : "bg-red-500"
                     )}
                   >
                     {isIncome ? (
-                      <ArrowUpRight className="h-4 w-4 text-green-600 dark:text-green-400" />
+                      <ArrowUpRight className="h-4 w-4" />
                     ) : (
-                      <ArrowDownRight className="h-4 w-4 text-red-600 dark:text-red-400" />
+                      <ArrowDownRight className="h-4 w-4" />
                     )}
                   </div>
 

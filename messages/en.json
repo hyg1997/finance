@@ -76,7 +76,19 @@
     "searchByConcept": "Search by concept...",
     "title": "Transactions",
     "subtitle": "Manage your income and expenses",
-    "searchPlaceholder": "Search transactions..."
+    "searchPlaceholder": "Search transactions...",
+    "noDescription": "No description",
+    "noTransactions": "No transactions available",
+    "deleteTitle": "Delete Transaction",
+    "deleteDescription": "Are you sure you want to delete the transaction '{concept}' for ${amount}? This action cannot be undone.",
+    "delete": "Delete",
+    "deleting": "Deleting...",
+    "deleteSuccess": "Transaction deleted",
+    "deleteSuccessDescription": "The transaction has been successfully deleted.",
+    "deleteError": "Error deleting",
+    "deleteErrorDescription": "An error occurred while deleting the transaction.",
+    "editTitle": "Edit Transaction",
+    "editDescription": "Modify the transaction details."
   },
   "profile": {
     "title": "Profile",
@@ -138,6 +150,15 @@
     "user": "User"
   },
   "currency": {
-    "symbol": "S/."
+    "symbol": "$",
+    "code": "USD",
+    "name": "US Dollar"
+  },
+  "currencySelector": {
+    "label": "Currency",
+    "pen": "Soles (PEN)",
+    "usd": "Dollars (USD)",
+    "convertedAmount": "Equivalent",
+    "exchangeRate": "Exchange rate"
   }
 }

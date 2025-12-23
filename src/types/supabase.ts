@@ -221,7 +221,10 @@ export interface TransactionFormData {
   readonly concept: string;
   readonly type: TransactionType;
   readonly groupId?: string;
+  readonly inputCurrency?: Currency;
 }
+
+export type Currency = "PEN" | "USD";
 
 export interface GroupFormData {
   readonly name: string;

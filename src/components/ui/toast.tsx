@@ -1,8 +1,7 @@
-import * as React from "react";
+import { forwardRef, ComponentPropsWithoutRef, ElementRef, ReactElement } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { forwardRef } from "react";
 
 const toastVariants = cva(
   "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
@@ -25,8 +24,8 @@ const toastVariants = cva(
 );
 
 const Toast = forwardRef<
-  React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div"> &
+  ElementRef<"div">,
+  ComponentPropsWithoutRef<"div"> &
     VariantProps<typeof toastVariants> & {
       open?: boolean | undefined;
     }
@@ -42,8 +41,8 @@ const Toast = forwardRef<
 Toast.displayName = "Toast";
 
 const ToastAction = forwardRef<
-  React.ElementRef<"button">,
-  React.ComponentPropsWithoutRef<"button">
+  ElementRef<"button">,
+  ComponentPropsWithoutRef<"button">
 >(({ className, ...props }, ref) => (
   <button
     ref={ref}
@@ -57,8 +56,8 @@ const ToastAction = forwardRef<
 ToastAction.displayName = "ToastAction";
 
 const ToastClose = forwardRef<
-  React.ElementRef<"button">,
-  React.ComponentPropsWithoutRef<"button">
+  ElementRef<"button">,
+  ComponentPropsWithoutRef<"button">
 >(({ className, onClick, ...props }, ref) => (
   <button
     ref={ref}
@@ -76,8 +75,8 @@ const ToastClose = forwardRef<
 ToastClose.displayName = "ToastClose";
 
 const ToastTitle = forwardRef<
-  React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div">
+  ElementRef<"div">,
+  ComponentPropsWithoutRef<"div">
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
@@ -88,16 +87,16 @@ const ToastTitle = forwardRef<
 ToastTitle.displayName = "ToastTitle";
 
 const ToastDescription = forwardRef<
-  React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div">
+  ElementRef<"div">,
+  ComponentPropsWithoutRef<"div">
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("text-sm opacity-90", className)} {...props} />
 ));
 ToastDescription.displayName = "ToastDescription";
 
-type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>;
+type ToastProps = ComponentPropsWithoutRef<typeof Toast>;
 
-type ToastActionElement = React.ReactElement<typeof ToastAction>;
+type ToastActionElement = ReactElement<typeof ToastAction>;
 
 export {
   type ToastProps,
